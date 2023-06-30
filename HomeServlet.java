@@ -42,20 +42,27 @@ public class HomeServlet extends HttpServlet {
 			List<Category> categoryList = categoryService.getAllCategories();
 			BookService bookService = new BookService();
 			
+			String bookName = request.getParameter("bookName");
+			List<Book> bookListBySearch = bookService.getBooksByName(bookName);
+			
 			String categoryId = request.getParameter("categoryId");
 			List<Book> bookList = new ArrayList<Book>();
 			
 			
-			if (categoryId == null) {
+			if (categoryId == null && bookName == null) {
 				bookList = bookService.getAllBooks();
 			}
-			else {
-				bookList = bookService.getBooksByCategoryId(Integer.parseInt(categoryId));
+			if (bookName != null){
+				bookListBySearch = bookService.getBooksByName(bookName);	
+				}
+			if (categoryId != null)	{	
+					bookList = bookService.getBooksByCategoryId(Integer.parseInt(categoryId));
 			}
 			
 			RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 			request.setAttribute("categoryList", categoryList);
 			request.setAttribute("bookList", bookList);
+			request.setAttribute("bookListBySearch", bookListBySearch);
 			rd.forward(request, response);
 
 		}
