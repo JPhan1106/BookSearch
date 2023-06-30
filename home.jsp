@@ -66,7 +66,7 @@
 		<c:if test="${not empty bookListBySearch}">
 			<ul>
 				<c:forEach var="book" items="${bookListBySearch}">
-					<a href="search?bookName=${'%'}${book.name}${'%'}">
+					<a href="book?bookId=${book.id}">
 						<li>${book.name}</li>
 					</a>
 				</c:forEach>
