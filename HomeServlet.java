@@ -40,10 +40,11 @@ public class HomeServlet extends HttpServlet {
 		try {
 			CategoryService categoryService = new CategoryService();
 			List<Category> categoryList = categoryService.getAllCategories();
+			
 			BookService bookService = new BookService();
 			
 			String bookName = request.getParameter("bookName");
-			List<Book> bookListBySearch = bookService.getBooksByName(bookName);
+			List<Book> bookListBySearch = new ArrayList<Book>();
 			
 			String categoryId = request.getParameter("categoryId");
 			List<Book> bookList = new ArrayList<Book>();
